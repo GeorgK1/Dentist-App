@@ -1,16 +1,47 @@
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+</head>
 <body>
 <form action="#" th:action="@{/}" th:object="${dentistVisitDTO}" method="post">
+
     <div class="container">
+
+        <h2>Parim hambakliinik maailmas!</h2>
+        <h3>Meie juures töötavad hambaarstid:</h3>
+
+
     <table>
         <tr>
             <td><p th:text="#{dentist.name}">dentist.name</p></td>
-            <td><input type="text" th:field="*{dentistName}"/></td>
-            <td th:if="${#fields.hasErrors('dentistName')}" th:errors="*{dentistName}">name.error</td>
+
+            <td>
+            <select th:field="*{dentistName}" required="required" >
+                <option value="Peeter Porgand">Peeter Porgand</option>
+                <option value="Peeter Pets">Peeter Pets</option>
+                <option value="Malle Mari">Malle Mari</option>
+                <option value="Juku Juhan">Juku Juhan</option>
+                <option value="Malle Kalle">Malle Kalle</option>
+            </select>
+            </td>
         </tr>
+
+        <tr>
+            <td><p th:text="#{client.name}">client.name</p></td>
+            <td><input type="text" th:field="*{clientName}"/></td>
+
+            <td class="errormsg" th:if="${#fields.hasErrors('clientName')}" th:errors="*{clientName}">name.error</td>
+        </tr>
+
         <tr>
             <td><p th:text="#{visit.date}">visit.date</p></td>
-            <td><input type="text" th:field="*{visitTime}"/></td>
+            <td><input type="date" th:field="*{visitDate}"/></td>
+            <td class="errormsg" th:if="${#fields.hasErrors('visitDate')}" th:errors="*{visitDate}">date.error</td>
+        </tr>
+
+        <tr>
+            <td><p th:text="#{visit.time}">visit.time</p></td>
+            <td><input type="time" th:field="*{visitTime}"/></td>
             <td class="errormsg" th:if="${#fields.hasErrors('visitTime')}" th:errors="*{visitTime}">date.error</td>
         </tr>
         <tr>
@@ -19,14 +50,16 @@
             </td>
         </tr>
     </table>
+
     </div>
-    <style>
+    <style type="text/css">
         .container{
             height: 100%;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             background-color: lightblue;
         }
         td {

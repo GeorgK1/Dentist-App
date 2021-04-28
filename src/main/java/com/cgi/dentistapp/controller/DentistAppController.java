@@ -35,8 +35,8 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         if (bindingResult.hasErrors()) {
             return "form";
         }
-
-        dentistVisitService.addVisit(dentistVisitDTO.getDentistName(), dentistVisitDTO.getVisitTime());
+        System.out.println(dentistVisitDTO.getClientName());
+        dentistVisitService.addVisit(dentistVisitDTO.getDentistName(), dentistVisitDTO.getVisitDate(), dentistVisitDTO.getVisitTime(), dentistVisitDTO.getClientName());
         return "redirect:/results";
     }
 }

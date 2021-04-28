@@ -1,15 +1,15 @@
-package com.cgi.dentistapp.doctors;
+package com.cgi.dentistapp.dentist;
 
-public class Doctor {
+public class Dentist {
     private String name;
     private Integer workingExperience;
     private String email;
 
-    public Doctor(){
+    public Dentist(){
 
     }
 
-    public Doctor (String name, Integer workingExperience, String email) {
+    public Dentist(String name, Integer workingExperience, String email) {
         this.name = name;
         this.workingExperience = workingExperience;
         this.email = email;

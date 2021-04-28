@@ -1,37 +1,37 @@
 package com.cgi.dentistapp.dto;
 
-import com.cgi.dentistapp.dentistValidator.dentistValidator;
+import com.cgi.dentistapp.dentistValidator.DentistExists;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.metadata.BeanDescriptor;
 import java.util.Date;
-import java.util.Set;
 
 public class DentistVisitDTO {
-    dentistValidator dentistValidator = new dentistValidator();
+
     @Size(min = 1, max = 50)
-    @dentistValidator.validate()
+    @DentistExists(message = "Seda hambaarsti ei eksisteeri")
     String dentistName;
 
+    String clientName;
+
     @NotNull
-
-
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    //to ensure no registrations to the past
     @Future
+    Date visitDate;
 
-    Date visitTime;
-
+    String visitTime;
     public DentistVisitDTO() {
     }
 
-    public DentistVisitDTO(String dentistName, Date visitTime) {
+    public DentistVisitDTO(String dentistName, Date visitDate, String visitTime, String clientName) {
         this.dentistName = dentistName;
+        this.clientName = clientName;
+        this.visitDate = visitDate;
         this.visitTime = visitTime;
+
     }
 
     public String getDentistName() {
@@ -43,12 +43,27 @@ public class DentistVisitDTO {
         this.dentistName = dentistName;
     }
 
-    public Date getVisitTime() {
+    public String getClientName() {
+        return clientName;
+    }
 
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getVisitTime() {
         return visitTime;
     }
 
-    public void setVisitTime(Date visitTime) {
+    public void setVisitTime(String visitTime) {
         this.visitTime = visitTime;
+    }
+
+    public Date getVisitDate() {
+        return visitDate;
+    }
+
+    public void setVisitDate(Date visitDate) {
+        this.visitDate = visitDate;
     }
 }
