@@ -1,59 +1,48 @@
 package com.cgi.dentistapp.entity;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
-@Table(name = "DENTIST_VISIT")
 public class DentistVisitEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private final UUID id;
 
-    @Column(name = "CLIENTNAME")
-    private final String ClientName;
+    private Long id;
+    private String clientName;
+    private String doctorName;
+    private Date registrationDate;
+    private String registrationTime;
 
-    @Column(name = "DOCTORNAME")
-    private final String DoctorName;
+    public DentistVisitEntity(){}
 
-    @Column(name = "REGISTRATIONDATE")
-    private final Date RegistrationDate;
-
-    @Column(name = "SUBMITDATE")
-    private final Date SubmitDate;
-
-
-    public DentistVisitEntity(UUID id, String ClientName, String DoctorName, Date registrationDate, Date SubmitDate){
-
-        this.id = id;
-        this.ClientName = ClientName;
-        this.DoctorName = DoctorName;
-        this.RegistrationDate = registrationDate;
-        this.SubmitDate = SubmitDate;
+    public DentistVisitEntity(String clientName, String doctorName, Date registrationDate, String registrationTime){
+        this.clientName = clientName;
+        this.doctorName = doctorName;
+        this.registrationDate = registrationDate;
+        this.registrationTime = registrationTime;
     }
-    //TODO implementation
-
-    public UUID getId() {
+    //getters and setters
+    public Long getId() {
         return id;
     }
 
     public String getClientName() {
-        return ClientName;
+        return clientName;
     }
 
     public String getDoctorName() {
-        return DoctorName;
+        return doctorName;
     }
 
     public Date getRegistrationDate() {
-        return RegistrationDate;
+        return registrationDate;
     }
 
-    public Date getSubmitDate() {
-        return SubmitDate;
+    public String getRegistrationTime() {
+        return registrationTime;
     }
+
 
 }

@@ -1,24 +1,30 @@
 package com.cgi.dentistapp.controller;
 
 import com.cgi.dentistapp.dto.DentistVisitDTO;
+import com.cgi.dentistapp.entity.DentistVisitEntity;
 import com.cgi.dentistapp.service.DentistVisitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @EnableAutoConfiguration
 public class DentistAppController extends WebMvcConfigurerAdapter {
 
     @Autowired
-    private DentistVisitService dentistVisitService;
+    DentistVisitService dentistVisitService;
+
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -35,8 +41,21 @@ public class DentistAppController extends WebMvcConfigurerAdapter {
         if (bindingResult.hasErrors()) {
             return "form";
         }
-        System.out.println(dentistVisitDTO.getClientName());
         dentistVisitService.addVisit(dentistVisitDTO.getDentistName(), dentistVisitDTO.getVisitDate(), dentistVisitDTO.getVisitTime(), dentistVisitDTO.getClientName());
+
         return "redirect:/results";
+    }
+
+    @GetMapping("/registrations")
+    public ModelAndView getAllRegistrations(){
+        List<DentistVisitEntity> entities = dentistVisitService.viewAllVisits();
+        ModelAndView mav = new ModelAndView("showAllRegistrations");
+        mav.addObject("entities", entities);
+        return mav;
+    }
+
+    @DeleteMapping("/registrations/{id}")
+    private void deletePerson(@PathVariable("id") long id) {
+        dentistVisitService.delete(id);
     }
 }

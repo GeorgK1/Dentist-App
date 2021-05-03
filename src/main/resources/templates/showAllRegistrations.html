@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+  <table>
+      <h2>Broneeritud ajad</h2>
+
+      <tr th:each = "entity: ${entities}">
+          <td><p th:text="${entity.id}"></p></td>
+          <td><p th:text="${entity.clientName}"></p></td>
+          <td><p th:text="${entity.doctorName}"></p></td>
+          <td><p th:text="${entity.registrationDate}"></p></td>
+          <td><p th:text="${entity.registrationTime}"></p></td>
+      </tr>
+
+  </table>
+</body>
+</html>
